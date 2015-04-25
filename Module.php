@@ -14,6 +14,8 @@ class Module extends \yii\base\Module
 
     public $tempPath = '@app/uploads/temp';
 
+    public $tag = 'default';
+
     public $rules = [];
 
     public function init()
@@ -140,6 +142,7 @@ class Module extends \yii\base\Module
         $file->name = pathinfo($filePath, PATHINFO_FILENAME);
         $file->model = $this->getShortClass($owner);
         $file->itemId = $owner->id;
+        $file->tag = $this->tag;
         $file->hash = $fileHash;
         $file->size = filesize($filePath);
         $file->type = $fileType;

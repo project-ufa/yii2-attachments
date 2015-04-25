@@ -12,6 +12,7 @@ class m150127_040544_add_attachments extends Migration
             'name' => Schema::TYPE_STRING . ' not null',
             'model' => Schema::TYPE_STRING . ' not null',
             'itemId' => Schema::TYPE_INTEGER . ' not null',
+            'tag' => Schema::TYPE_STRING. ' not null',
             'hash' => Schema::TYPE_STRING . ' not null',
             'size' => Schema::TYPE_INTEGER . ' not null',
             'type' => Schema::TYPE_STRING . ' not null',
