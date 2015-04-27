@@ -21,6 +21,7 @@ class UploadForm extends Model
      */
     public $file;
 
+    public $tag;
     /**
      * @return array the validation rules.
      */

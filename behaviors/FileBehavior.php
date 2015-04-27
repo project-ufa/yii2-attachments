@@ -14,6 +14,7 @@ use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
@@ -36,6 +37,7 @@ class FileBehavior extends Behavior
 
         if (!empty($files)) {
             foreach ($files as $file) {
+                \Yii::trace('saveUploads: file: '. print_r($file, true), 'debug');
                 if (!$file->saveAs($this->getModule()->getUserDirPath() . $file->name)) {
                     throw new \Exception(\Yii::t('yii', 'File upload failed.'));
                 }
@@ -44,11 +46,14 @@ class FileBehavior extends Behavior
 
         $userTempDir = $this->getModule()->getUserDirPath();
         foreach (FileHelper::findFiles($userTempDir) as $file) {
-            if (!$this->getModule()->attachFile($file, $this->owner)) {
+            $dirnames = StringHelper::explode(dirname($file), DIRECTORY_SEPARATOR, false);
+            $tag = end($dirnames); //[count($dirnames) - 1];
+
+            if (!$this->getModule()->attachFile($file, $this->owner, $tag)) {
                 throw new \Exception(\Yii::t('yii', 'File upload failed.'));
             }
         }
-        rmdir($userTempDir);
+        FileHelper::removeDirectory($userTempDir);
     }
 
     public function deleteUploads($event)

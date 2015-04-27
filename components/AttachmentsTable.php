@@ -79,6 +79,12 @@ class AttachmentsTable extends Widget
                     }
                 ],
                 [
+                    'label' => $this->getModule()->t('attachments', 'Tag'),
+                    'value' => function ($model) {
+                        return "$model->tag";
+                    }
+                ],
+                [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{delete}',
                     'buttons' => [

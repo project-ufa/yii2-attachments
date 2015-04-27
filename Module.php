@@ -110,11 +110,12 @@ class Module extends \yii\base\Module
     /**
      * @param $filePath string
      * @param $owner
+     * @param $tag
      * @return bool|File
      * @throws \Exception
      * @throws \yii\base\InvalidConfigException
      */
-    public function attachFile($filePath, $owner)
+    public function attachFile($filePath, $owner, $tag='default')
     {
         if (!$owner->id) {
             throw new \Exception('Owner must have id when you attach file');
@@ -142,7 +143,7 @@ class Module extends \yii\base\Module
         $file->name = pathinfo($filePath, PATHINFO_FILENAME);
         $file->model = $this->getShortClass($owner);
         $file->itemId = $owner->id;
-        $file->tag = $this->tag;
+        $file->tag = $tag;
         $file->hash = $fileHash;
         $file->size = filesize($filePath);
         $file->type = $fileType;

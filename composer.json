@@ -15,8 +15,14 @@
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
-        "kartik-v/yii2-widget-fileinput": "*"
+        "kartik-v/yii2-widget-fileinput": "dev-tagged_files"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:project-ufa/yii2-widget-fileinput.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "nemmo\\attachments\\": ""
