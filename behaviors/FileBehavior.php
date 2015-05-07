@@ -79,6 +79,19 @@ class FileBehavior extends Behavior
         return $fileQuery->all();
     }
 
+    public function getFilesByTag($tag)
+    {
+        $fileQuery = File::find()
+            ->where([
+                'itemId' => $this->owner->id,
+                'model' => $this->getModule()->getShortClass($this->owner),
+                'tag' => $tag
+            ]);
+        $fileQuery->orderBy(['id' => SORT_ASC]);
+
+        return $fileQuery->all();
+    }
+
     public function getInitialPreview()
     {
         $initialPreview = [];
@@ -136,5 +149,10 @@ class FileBehavior extends Behavior
         }
 
         return $initialPreviewConfig;
+    }
+
+    public function __call($name, $params)
+    {
+        return parent::__call($name, $params);
     }
 }
